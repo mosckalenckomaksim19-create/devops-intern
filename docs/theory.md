@@ -8,7 +8,7 @@
 
 Пример: `git fetch origin` позволяет сначала посмотреть изменения командой `git log --oneline HEAD..origin/main`. `git pull --ff-only` обновит текущую ветку, только если её можно передвинуть вперёд без объединения разошедшихся историй; иначе завершится ошибкой.
 
-На защите: «fetch скачивает изменения для ознакомления, pull ещё и интегрирует их в мою текущую ветку». [Документация Git](https://git-scm.com/docs/git-pull).
+[Документация Git](https://git-scm.com/docs/git-pull).
 
 ## 2. Чем soft link отличается от hard link? Что будет после удаления оригинала? Можно ли hard link на директорию?
 
@@ -18,21 +18,7 @@ Soft link, или symlink, — отдельный объект, который �
 
 Hard link обычно нельзя создать между разными файловыми системами. Пользовательские hard link на директории в Linux запрещены, в том числе чтобы не образовывались циклы дерева каталогов. Symlink может указывать на директорию и на путь в другой файловой системе.
 
-Безопасный опыт в новом временном каталоге на Linux:
-
-```bash
-mkdir link-demo
-cd link-demo
-printf 'hello\n' > original.txt
-ln original.txt hard.txt
-ln -s original.txt soft.txt
-ls -li
-rm original.txt
-cat hard.txt
-cat soft.txt
-```
-
-Последняя команда завершится ошибкой, а `cat hard.txt` напечатает `hello`. Не запускай `rm` с именем своего рабочего файла: здесь удаляется только созданный для опыта `original.txt`. Источники: [link(2)](https://man7.org/linux/man-pages/man2/link.2.html), [symlink(7)](https://man7.org/linux/man-pages/man7/symlink.7.html).
+Источники: [link(2)](https://man7.org/linux/man-pages/man2/link.2.html), [symlink(7)](https://man7.org/linux/man-pages/man7/symlink.7.html).
 
 ## 3. Как проверить сетевую доступность между двумя Linux-машинами?
 
@@ -77,7 +63,7 @@ COPY . .
 
 `npm ci` устанавливает зависимости по lock-файлу и проверяет его согласованность с `package.json`. В `.dockerignore` добавляют `node_modules`, чтобы локальные зависимости не перезаписали контейнерные. Изменение манифеста или lock-файла потребует нового выполнения установки.
 
-В нашем Python-приложении сторонних зависимостей нет, поэтому `npm` и шаг установки пакетов в Dockerfile не нужны. [Docker о порядке слоёв и кэше](https://docs.docker.com/build/cache/optimize/).
+[Docker о порядке слоёв и кэше](https://docs.docker.com/build/cache/optimize/).
 
 ## 6. Могут ли два контейнера внутри одного Pod слушать один и тот же порт?
 
@@ -85,7 +71,7 @@ COPY . .
 
 Одинаковый номер порта возможен при разных протоколах, например TCP и UDP, или при привязке к разным непересекающимся локальным адресам. Есть специальные механизмы вроде `SO_REUSEPORT`, но это не типичный способ запуска независимых сервисов в Pod.
 
-Два разных Pod могут слушать `32777/TCP`: обычно у каждого собственный IP и сетевое пространство. В нашем Deployment именно два Pod по одному контейнеру, а не один Pod с двумя контейнерами. Поле YAML `containerPort` не открывает сокет: слушать порт должен сам процесс. [Kubernetes о сети Pod](https://kubernetes.io/docs/concepts/workloads/pods/).
+Два разных Pod могут слушать `32777/TCP`: обычно у каждого собственный IP и сетевое пространство. Поле YAML `containerPort` не открывает сокет: слушать порт должен сам процесс. [Kubernetes о сети Pod](https://kubernetes.io/docs/concepts/workloads/pods/).
 
 ## 7. Какие виды JOIN знаете и чем они отличаются?
 
@@ -126,5 +112,3 @@ HAVING SUM(amount) > 1000;
 Сначала оставляем оплаченные заказы, затем считаем их сумму по пользователю, затем оставляем пользователей с суммой больше 1000. Логический порядок для понимания: `FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY`; оптимизатор может выполнять операции иначе, сохраняя смысл.
 
 `HAVING` возможен и без явного `GROUP BY`: строки рассматриваются как одна группа. `WHERE SUM(amount) > 1000` на том же уровне запроса некорректен. [PostgreSQL о GROUP BY и HAVING](https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-GROUP).
-
-Практика: [sql-demo.sql](sql-demo.sql) содержит таблицы, данные и запросы, которые можно выполнить в PostgreSQL или актуальной SQLite. Это отдельное упражнение; приложение не требует базы данных.

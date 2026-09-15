@@ -1,15 +1,27 @@
-# Скриншоты для сдачи
+# Скриншоты результатов
 
-1. `docker-local.png` — `docker ps` с контейнером и пробросом 32777, успешный локальный HTTP-ответ - ![Скриншот](docker-local.png.png)
-2. `hello-world1.png`, `hello-world2.png` - скрин работы сайта
-	![Скриншот](hello-world1.png.png)
-	![Скриншот](hello-world2.png.png)
-3. dockerhub.png` — публичный репозиторий Docker Hub и тег `1.0.0`.
-	![Скриншот](dockerhub.png.png)
-4. `kubernetes.png` — `minikube status -p devops-intern`, Deployment `READY 2/2`, два Pod `Running`, каждый `READY 1/1`.
-	![Скриншот](kubernetes.png.png)
-5. распределение портов - `port.png`
-	![Скриншот](port.png.png)
-6. работающий порт форвад - `port-forward.png`
-	![Скриншот](port-forward.png.png)
+## Локальный Docker-контейнер
 
+![Запуск контейнера и HTTP-ответ](docker-local.png.png)
+
+## Веб-приложение
+
+![Страница приложения при локальном запуске](hello-world1.png.png)
+
+![Страница приложения в Kubernetes](hello-world2.png.png)
+
+## Публикация Docker Hub
+
+![Репозиторий Docker Hub](dockerhub.png.png)
+
+## Kubernetes
+
+![Состояние Deployment, Pod и Service](kubernetes.png.png)
+
+## Запросы через Service
+
+![Результат запросов к репликам](port.png.png)
+
+## Port-forward
+
+![Работающий проброс порта](port-forward.png.png)
