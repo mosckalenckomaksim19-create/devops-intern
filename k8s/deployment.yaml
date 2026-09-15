@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: hello-world
-          # Replace xumuk595 before applying this file.
           image: xumuk595/devops-hello:1.0.0
           imagePullPolicy: IfNotPresent
           ports:
